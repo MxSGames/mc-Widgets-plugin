@@ -1,0 +1,9 @@
+main: com.monsterxsquad.widgets.Widgets
+name: Widgets
+version: '1.0.7'
+api-version: '1.21'
+website: https://monsterxsquad.com/
+dependencies:
+  server:
+    PlaceholderAPI:
+      required: true
