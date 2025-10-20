@@ -1,15 +1,15 @@
 <div align="center">
-  <a href="https://discord.gg/lexiam" alt="Discord">
-    <img src="https://img.shields.io/discord/894116304561270855?label=Discord&logo=discord">
+  <a href="https://discord.gg/gsfJzbfK6a" alt="Discord">
+    <img src="https://img.shields.io/discord/1428413635067379876?label=Discord&logo=discord">
   </a>
 </div>
 
-Widgets is a Utility plugin which shows widgets on the player's screen, this allows for custom resource packs to be used on menus which includes clickable options
+Widgets is a utility plugin that shows widgets on the player's screen. This allows for custom resource packs to be used on menus which includes clickable options
 
 ## Features
-⭐ Multi Widgets for differant scenarios
+⭐ Multi Widgets for different scenarios
 
-⭐ Control over if a player should be damageable when loading the pack
+⭐ Control over whether a player should be damageable when loading the pack
 
 ⭐ Customizable fades and delay
 
