@@ -30,8 +30,8 @@ jobs:
       - name: Auto release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          repo_token: "${{secrets.GITHUB_TOKEN}}"
           automatic_release_tag: latest
           prerelease: false
           files: |
-            build/libs/MxSSMPCore*.jar
+            build/libs/Widgets-*-all.jar

@@ -39,7 +39,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT")
     implementation("dev.jorel:commandapi-paper-shade:11.0.0")
 
-    compileOnly("me.clip:placeholderapi:2.11.3")
+    compileOnly("me.clip:placeholderapi:2.11.6")
 
     implementation("org.bstats:bstats-bukkit:3.0.2")
 
