@@ -6,7 +6,7 @@ import com.monsterxsquad.widgets.Utils.ColourUtils;
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
 import dev.jorel.commandapi.arguments.IntegerArgument;
-import dev.jorel.commandapi.arguments.PlayerArgument;
+import dev.jorel.commandapi.arguments.PlayerProfileArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import net.kyori.adventure.title.Title;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -28,7 +28,7 @@ public class WidgetsFadeCommand implements SubCommands {
     public CommandAPICommand onCommand() {
         return new CommandAPICommand("fade")
                 .withPermission("widgets.commands.fade")
-                .withArguments(new PlayerArgument("playername"))
+                .withArguments(new PlayerProfileArgument("playername"))
                 .withArguments(new StringArgument("widget").replaceSuggestions(ArgumentSuggestions.stringCollection(info -> plugin.getConfigManager().getWidgets().keySet())))
                 .withArguments(new IntegerArgument("fadein"))
                 .withArguments(new IntegerArgument("stay"))

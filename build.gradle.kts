@@ -36,8 +36,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.8-R0.1-SNAPSHOT")
-    implementation("dev.jorel:commandapi-bukkit-shade-mojang-mapped:10.1.2")
+    compileOnly("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT")
+    implementation("dev.jorel:commandapi-paper-shade:11.0.0")
 
     compileOnly("me.clip:placeholderapi:2.11.3")
 

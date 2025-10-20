@@ -12,6 +12,7 @@ import com.monsterxsquad.widgets.Managers.ResourcePack.ResourcePackManager;
 import com.monsterxsquad.widgets.Managers.Widgets.WidgetsManager;
 import dev.jorel.commandapi.CommandAPI;
 import dev.jorel.commandapi.CommandAPIBukkitConfig;
+import dev.jorel.commandapi.CommandAPIPaperConfig;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,7 +32,7 @@ public class Widgets extends JavaPlugin {
 
     @Override
     public void onLoad() {
-        CommandAPI.onLoad(new CommandAPIBukkitConfig(this));
+        CommandAPI.onLoad(new CommandAPIPaperConfig(this));
     }
 
     @Override

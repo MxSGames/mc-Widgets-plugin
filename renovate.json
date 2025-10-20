@@ -1,0 +1,33 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "gradle:default",
+    ":separateMajorReleases",
+    ":prImmediately"
+  ],
+  "baseBranches": ["main"],
+  "labels": ["dependencies", "gradle"],
+  "prConcurrentLimit": 5,
+  "prHourlyLimit": 1,
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "description": "Useful libraries",
+      "matchPackagePatterns": [
+        "dev.jorel:commandapi-paper-shade",
+        "me.clip:placeholderapi",
+        "org.reflections"
+      ],
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    },
+    {
+      "description": "Automatically update Gradle Wrapper",
+      "matchManagers": ["gradle-wrapper"],
+      "groupName": "Gradle Wrapper Update",
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true
+    }
+  ]
+}
