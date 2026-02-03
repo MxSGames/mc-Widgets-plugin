@@ -4,10 +4,7 @@ import com.monsterxsquad.widgets.Managers.Commands.SubCommands.SubCommands;
 import com.monsterxsquad.widgets.Widgets;
 import com.monsterxsquad.widgets.Utils.ColourUtils;
 import dev.jorel.commandapi.CommandAPICommand;
-import dev.jorel.commandapi.arguments.ArgumentSuggestions;
-import dev.jorel.commandapi.arguments.IntegerArgument;
-import dev.jorel.commandapi.arguments.PlayerProfileArgument;
-import dev.jorel.commandapi.arguments.StringArgument;
+import dev.jorel.commandapi.arguments.*;
 import net.kyori.adventure.title.Title;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -28,7 +25,7 @@ public class WidgetsFadeCommand implements SubCommands {
     public CommandAPICommand onCommand() {
         return new CommandAPICommand("fade")
                 .withPermission("widgets.commands.fade")
-                .withArguments(new PlayerProfileArgument("playername"))
+                .withArguments(new EntitySelectorArgument.OnePlayer("playername"))
                 .withArguments(new StringArgument("widget").replaceSuggestions(ArgumentSuggestions.stringCollection(info -> plugin.getConfigManager().getWidgets().keySet())))
                 .withArguments(new IntegerArgument("fadein"))
                 .withArguments(new IntegerArgument("stay"))
@@ -50,7 +47,6 @@ public class WidgetsFadeCommand implements SubCommands {
                     int fadeIn = (int) args.get("fadein");
                     int stay = (int) args.get("stay");
                     int fadeOut = (int) args.get("fadeout");
-
 
                     playerTarget.showTitle(Title.title(colourUtils.miniFormat(widgetFile.getString("unicodes.background")), colourUtils.miniFormat(""), Title.Times.times(Duration.ofMillis(fadeIn), Duration.ofMillis(stay), Duration.ofMillis(fadeOut))));
                 });

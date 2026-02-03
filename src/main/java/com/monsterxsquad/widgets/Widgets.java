@@ -19,8 +19,6 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Widgets extends JavaPlugin {
 
-    //TODO add Dialog support
-
     private ConfigManager configManager;
 
     private WidgetsManager widgetsManager;

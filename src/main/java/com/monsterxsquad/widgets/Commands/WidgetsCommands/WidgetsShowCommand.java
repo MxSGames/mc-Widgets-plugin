@@ -6,6 +6,7 @@ import com.monsterxsquad.widgets.Widgets;
 import com.monsterxsquad.widgets.Utils.ColourUtils;
 import dev.jorel.commandapi.CommandAPICommand;
 import dev.jorel.commandapi.arguments.ArgumentSuggestions;
+import dev.jorel.commandapi.arguments.EntitySelectorArgument;
 import dev.jorel.commandapi.arguments.PlayerProfileArgument;
 import dev.jorel.commandapi.arguments.StringArgument;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -25,7 +26,7 @@ public class WidgetsShowCommand implements SubCommands {
     public CommandAPICommand onCommand() {
         return new CommandAPICommand("show")
                 .withPermission("widgets.commands.show")
-                .withArguments(new PlayerProfileArgument("playername"))
+                .withArguments(new EntitySelectorArgument.OnePlayer("playername"))
                 .withArguments(new StringArgument("widget").replaceSuggestions(ArgumentSuggestions.stringCollection(info -> plugin.getConfigManager().getWidgets().keySet())))
                 .executes((sender, args) -> {
                     Player playerTarget = (Player) args.get("playername");

@@ -1,11 +1,11 @@
 plugins {
     id("java")
-    id("io.github.goooler.shadow") version "8.1.7"
+    id("com.gradleup.shadow") version "9.2.2"
     id("maven-publish")
 }
 
 group = "com.monsterxsquad"
-version = "1.0.7"
+version = "1.0.8"
 
 publishing {
     publications {
@@ -36,10 +36,10 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.10-R0.1-SNAPSHOT")
-    implementation("dev.jorel:commandapi-paper-shade:11.0.0")
+    compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
+    implementation("dev.jorel:commandapi-paper-shade:11.1.0")
 
-    compileOnly("me.clip:placeholderapi:2.11.6")
+    compileOnly("me.clip:placeholderapi:2.11.7")
 
     implementation("org.bstats:bstats-bukkit:3.0.2")
 
@@ -63,4 +63,13 @@ tasks.shadowJar {
 
 tasks.jar {
     dependsOn(tasks.shadowJar)
+}
+
+tasks.processResources {
+    val props = mapOf("version" to version)
+    inputs.properties(props)
+    filteringCharset = "UTF-8"
+    filesMatching("paper-plugin.yml") {
+        expand(props)
+    }
 }

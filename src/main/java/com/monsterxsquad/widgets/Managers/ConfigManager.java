@@ -15,7 +15,7 @@ public class ConfigManager {
 
     private FileConfiguration config, lang;
 
-    private final HashMap<String, FileConfiguration> widgets = new HashMap<>();
+    private HashMap<String, FileConfiguration> widgets = new HashMap<>();
 
     public ConfigManager(Widgets plugin) {
         this.plugin = plugin;
@@ -37,9 +37,13 @@ public class ConfigManager {
     }
 
     private void loadWidgets() {
+        HashMap<String, FileConfiguration> tempWidgetsCache = new HashMap<>();
+
         for (File file : getAllFiles(new File(plugin.getDataFolder(), "Widgets"), ".yml")) {
-            widgets.put(file.getName().replace(".yml", ""), YamlConfiguration.loadConfiguration(file));
+            tempWidgetsCache.put(file.getName().replace(".yml", ""), YamlConfiguration.loadConfiguration(file));
         }
+
+        this.widgets = tempWidgetsCache;
     }
 
     public List<File> getAllFiles(File folder, String fileType) {
