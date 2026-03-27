@@ -9,11 +9,18 @@ import com.monsterxsquad.widgets.Widgets;
 import com.monsterxsquad.widgets.Managers.PDCData.ItemData;
 import com.monsterxsquad.widgets.Managers.PDCData.PDC.ItemDataPDC;
 import com.monsterxsquad.widgets.Managers.GUI.MenuInventoryHolder;
+import io.papermc.paper.datacomponent.DataComponentTypes;
+import io.papermc.paper.datacomponent.item.ItemLore;
+import io.papermc.paper.datacomponent.item.TooltipDisplay;
+import net.kyori.adventure.key.Key;
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
+import net.kyori.adventure.text.minimessage.tag.resolver.TagResolver;
 import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -54,34 +61,28 @@ public class WidgetMenu implements MenuInventoryHolder {
         Bukkit.getGlobalRegionScheduler().runDelayed(plugin, task -> {
             if (plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getConfigurationSection("menu") != null) {
                 for (String key : plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getConfigurationSection("menu").getKeys(false)) {
+                    ConfigurationSection widgetItemConfig = plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getConfigurationSection("menu." + key);
 
-                    int slot = plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getInt("menu." + key + ".slot");
-                    ItemStack item = new ItemStack(Material.valueOf(plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getString("menu." + key + ".material")));
+                    int slot = widgetItemConfig.getInt("slot");
+                    ItemStack item = new ItemStack(Material.valueOf(widgetItemConfig.getString("material")));
 
-                    item.editMeta(meta -> {
-                        if (plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).get("menu." + key + ".lore") != null) {
-                            List<Component> loreSetter = new ArrayList<>();
+                    item.setData(DataComponentTypes.ITEM_NAME, colourUtils.miniFormat(widgetItemConfig.getString("name")));
 
-                            for (String string : plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getStringList("menu." + key + ".lore")) {
-                                loreSetter.add(colourUtils.placeHolderMiniFormat(player, string));
-                            }
+                    item.editPersistentDataContainer(pdc -> pdc.set(itemDataKey, new ItemDataPDC(), new ItemData(slot, key)));
 
-                            meta.lore(loreSetter);
-                        }
+                    if (widgetItemConfig.contains("components.item-model")) item.setData(DataComponentTypes.ITEM_MODEL, Key.key(widgetItemConfig.getString("components.item-model.namespace"), widgetItemConfig.getString("components.item-model.path")));
 
-                        if (plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getBoolean("menu." + key + ".hide-flags")) {
-                            meta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-                            meta.addItemFlags(ItemFlag.HIDE_DESTROYS);
-                            meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
-                            meta.addItemFlags(ItemFlag.HIDE_PLACED_ON);
-                            meta.addItemFlags(ItemFlag.HIDE_UNBREAKABLE);
-                        }
+                    if (widgetItemConfig.get("lore") != null) {
+                        List<Component> loreSetter = new ArrayList<>();
 
-                        meta.setCustomModelData(plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getInt("menu." + key + ".custom-model"));
-                        meta.displayName(colourUtils.miniFormat(plugin.getConfigManager().getWidgets().get(playerWidgetData.getId()).getString("menu." + key + ".name")));
+                        widgetItemConfig.getStringList("lore").forEach(loreLine -> {
+                            loreSetter.add(colourUtils.placeHolderMiniFormat(player, loreLine));
+                        });
 
-                        meta.getPersistentDataContainer().set(itemDataKey, new ItemDataPDC(), new ItemData(slot, key));
-                    });
+                        item.setData(DataComponentTypes.LORE, ItemLore.lore().addLines(loreSetter).build());
+                    }
+
+                    if (widgetItemConfig.getBoolean("hide-flags")) item.setData(DataComponentTypes.TOOLTIP_DISPLAY, TooltipDisplay.tooltipDisplay().addHiddenComponents(DataComponentTypes.ATTRIBUTE_MODIFIERS, DataComponentTypes.ENCHANTMENTS));
 
                     player.getOpenInventory().setItem(slot, item);
                 }

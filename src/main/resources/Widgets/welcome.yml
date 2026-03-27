@@ -44,7 +44,10 @@ menu:
   mxs: # The item ID
     material: "SHIELD"
     name: "<gradient:#B388FF:#82B1FF><bold>MxS SMP"
-    custom-model: 0 # Set a custom model
+    components:
+      item-model: # can be removed
+        namespace: "minecraft"
+        path: "iron_sword"
     slot: 22 # Valid slot values: 0-89 and 54-89 are the player's inventory.
     hide-flags: true # If true, lines in the lore such as "Damage: 4" will be hidden.
     close-on-click: true # If true, the widget will close when the player clicks this item.
@@ -60,7 +63,10 @@ menu:
   discord:
     material: "NETHER_STAR"
     name: "<#FFAA00>Join the Discord!"
-    custom-model: 0
+    components:
+      item-model: # can be removed
+        namespace: "minecraft"
+        path: "iron_sword"
     slot: 66
     close-on-click: true
     commands:
@@ -72,7 +78,10 @@ menu:
   twitch:
     material: "DIAMOND"
     name: '<#55FFFF>Check out my Twitch!'
-    custom-model: 0
+    components:
+      item-model: # can be removed
+        namespace: "minecraft"
+        path: "iron_sword"
     slot: 68
     close-on-click: true
     commands:

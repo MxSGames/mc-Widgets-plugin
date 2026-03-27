@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("com.gradleup.shadow") version "9.2.2"
+    id("com.gradleup.shadow") version "9.4.0"
     id("maven-publish")
 }
 
@@ -39,7 +39,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     implementation("dev.jorel:commandapi-paper-shade:11.1.0")
 
-    compileOnly("me.clip:placeholderapi:2.11.7")
+    compileOnly("me.clip:placeholderapi:2.12.2")
 
     implementation("org.bstats:bstats-bukkit:3.0.2")
 
